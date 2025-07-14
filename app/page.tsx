@@ -1,7 +1,6 @@
-import Link from 'next/link'
 import { fetchContents } from "@/lib/api"
 
-export default async function Contents() {
+export default async function Home() {
   const contents = await fetchContents();
 
   return (

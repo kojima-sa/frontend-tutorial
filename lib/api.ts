@@ -1,4 +1,4 @@
-import { Content } from "@/types/content"
+import { Content } from "@/lib/types"
 
 //一覧取得
 export async function fetchContents():Promise<Content[]> {
