@@ -32,7 +32,7 @@ export default function Sidebar() {
 
     return (
         <Box
-            width="250px"
+            width="300px"
             display="flex"
             flexDirection="column"
             height="100vh"
@@ -60,8 +60,14 @@ export default function Sidebar() {
                 {contents.map(item => (
                     <ListItem key={item.id}
                         secondaryAction={editMode && (
-                        <IconButton edge="end" aria-label="delete">
-                            <DeleteIcon />
+                        <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            sx={{
+                                    pl:"10px"
+                            }}
+                        >
+                            <DeleteIcon/>
                         </IconButton>
                     )}
                     >
@@ -91,7 +97,7 @@ export default function Sidebar() {
                         ml:"-40px",
                         mr:"-10px",
                         display:"flex" ,
-                        justifyContent: editMode ? "space-around" : "flex-end",
+                        justifyContent: editMode ? "space-between" : "flex-end",
                         alignItems: "center",
                     }}
                 >
@@ -117,7 +123,7 @@ export default function Sidebar() {
                         />
                         <Typography
                             sx={{
-                                height:"16px",
+                                fontSize:"10px"
                             }}
                         >
                             Edit
@@ -125,11 +131,59 @@ export default function Sidebar() {
                     </Button>
                     ) : (
                     <>
-                    <Button>
-                        <AddIcon />
+                    <Button
+                        variant="outlined"
+                        sx={{
+                            backgroundColor: "white",
+                            color:"#4CB3F8",
+                            minWidth: "40px",
+                            height:"40px",
+                            flexDirection: "column",
+                            textTransform: "none",
+                            p: 3,
+                            ml:5
+                        }}
+                    >
+                        <AddIcon
+                            sx={{
+                                height:"24px",
+                                width:"24px",
+                            }}
+                        />
+                        <Typography
+                            sx={{
+                                fontSize:"10px"
+                            }}
+                        >
+                            New page
+                        </Typography>
                     </Button>
-                    <Button onClick={() => setEditMode(false)}>
-                        <DoneIcon />
+                    <Button
+                        onClick={() => setEditMode(false)}
+                        variant="contained"
+                        sx={{
+                            backgroundColor: "#4CB3F8",
+                            color:"white",
+                            minWidth: 40,
+                            flexDirection: "column",
+                            textTransform: "none",
+                            px: 4,
+                            m:1.25
+                        }}
+                    >
+                        <DoneIcon
+                            sx={{
+                                height:"24px",
+                                width:"24px",
+                            }}
+                        />
+                        <Typography
+                            sx={{
+                                fontSize:"10px"
+                            }}
+                        >
+                            Done
+                        </Typography>
                     </Button>
                     </>
                     )}
