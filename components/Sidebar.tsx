@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import {
     Box, List, ListItem, ListItemButton, ListItemText,
-    IconButton, Divider, Typography
+    IconButton, Button, Typography
 } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import DoneIcon from "@mui/icons-material/Done"
@@ -36,7 +36,8 @@ export default function Sidebar() {
             p={2}
             display="flex"
             flexDirection="column"
-            sx={{ borderRight: '1px solid #ccc', pl: 5, pr: 1.25, }}
+            height="100vh"
+            sx={{ borderRight: '1px solid #F5F8FA', pl: 5, pr: 1.25, }}
         >
         {/* ロゴ＋会社名 */}
             <Box
@@ -66,27 +67,53 @@ export default function Sidebar() {
                     )}
                     >
                         <ListItemButton>
-                            <ListItemText primary={item.title} />
+                            <ListItemText
+                                primary={item.title}
+                                primaryTypographyProps={{
+                                    sx: {
+                                        fontWeight: "bold",
+                                        borderRadius:"4px",
+                                        height:"44px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                    }
+                                }}
+                            />
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
 
-            <Box mt="auto">
-                {!editMode ? (
-                    <IconButton onClick={() => setEditMode(true)}>
+
+            <Box mt="auto" >
+                <Box
+                    bgcolor="#F5F8FA"
+                    width="calc(100% + 40px + 10px)"
+                    ml="-40px"
+                    mr="-10px"
+                    display="flex"
+                    sx={{
+                        justifyContent: editMode ? "space-around" : "flex-end",
+                        alignItems: "center",
+                    }}
+                >
+                    {!editMode ? (
+                    <Button
+                        onClick={() => setEditMode(true)}
+                    >
                         <EditIcon />
-                    </IconButton>
+                    </Button>
                     ) : (
                     <>
-                    <IconButton>
+                    <Button>
                         <AddIcon />
-                    </IconButton>
-                        <IconButton onClick={() => setEditMode(false)}>
+                    </Button>
+                    <Button onClick={() => setEditMode(false)}>
                         <DoneIcon />
-                    </IconButton>
+                    </Button>
                     </>
                     )}
+                </Box>
             </Box>
         </Box>
     )

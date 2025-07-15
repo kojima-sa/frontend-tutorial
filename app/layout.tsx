@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Box } from "@mui/material"
+import { Box,Typography } from "@mui/material"
 import Sidebar from "@/components/Sidebar"
 
 const geistSans = Geist({
@@ -33,12 +33,19 @@ export default function RootLayout({
           <Sidebar />
           <Box component="main" flex={1} p={2} sx={{ overflow: "auto" }}>
             {children}
+            <Box
+              sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    px: 5,
+                  }}
+            >
+              <Typography variant="body2">Copyright © 2021 Sample</Typography>
+              <Typography variant="body2">運営会社</Typography>
+            </Box>
           </Box>
         </Box>
-        <div className="h-6 flex items-center justify-between text-caption">
-          <p>Copyright © 2021 Sample</p>
-          <p>運営会社</p>
-        </div>
       </body>
     </html>
   );
