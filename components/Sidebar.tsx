@@ -33,7 +33,6 @@ export default function Sidebar() {
     return (
         <Box
             width="250px"
-            p={2}
             display="flex"
             flexDirection="column"
             height="100vh"
@@ -71,8 +70,7 @@ export default function Sidebar() {
                                 primary={item.title}
                                 primaryTypographyProps={{
                                     sx: {
-                                        fontWeight: "bold",
-                                        borderRadius:"4px",
+                                        fontSize: "16px",
                                         height:"44px",
                                         display: "flex",
                                         alignItems: "center",
@@ -87,12 +85,12 @@ export default function Sidebar() {
 
             <Box mt="auto" >
                 <Box
-                    bgcolor="#F5F8FA"
-                    width="calc(100% + 40px + 10px)"
-                    ml="-40px"
-                    mr="-10px"
-                    display="flex"
                     sx={{
+                        backgroundColor: "#F5F8FA",
+                        width:"calc(100% + 40px + 10px)",
+                        ml:"-40px",
+                        mr:"-10px",
+                        display:"flex" ,
                         justifyContent: editMode ? "space-around" : "flex-end",
                         alignItems: "center",
                     }}
@@ -100,8 +98,30 @@ export default function Sidebar() {
                     {!editMode ? (
                     <Button
                         onClick={() => setEditMode(true)}
+                        variant="contained"
+                        sx={{
+                            backgroundColor: "#4CB3F8",
+                            color:"white",
+                            minWidth: 40,
+                            flexDirection: "column",
+                            textTransform: "none",
+                            px: 4,
+                            m:1.25
+                        }}
                     >
-                        <EditIcon />
+                        <EditIcon
+                            sx={{
+                                height:"24px",
+                                width:"24px"
+                            }}
+                        />
+                        <Typography
+                            sx={{
+                                height:"16px",
+                            }}
+                        >
+                            Edit
+                        </Typography>
                     </Button>
                     ) : (
                     <>
