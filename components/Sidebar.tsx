@@ -13,7 +13,12 @@ import Image from "next/image"
 import type { Content } from "@/lib/types"
 import { fetchContents } from "@/lib/api"
 
-export default function Sidebar() {
+type Props = {
+    selectedId: number | null;
+    setSelectedId: (id: number) => void;
+};
+
+export default function Sidebar({ selectedId, setSelectedId }: Props) {
     const [editMode, setEditMode] = useState(false)
     const [contents, setContents] = useState<Content[]>([])
 
