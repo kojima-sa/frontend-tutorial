@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { fetchContent } from "@/lib/api"
 import type { Content } from "@/lib/types"
-import { Box, Container, Typography } from "@mui/material"
+import { Box, Typography, Paper } from "@mui/material"
 
 type Props = {
     selectedId: number | null
@@ -37,9 +37,13 @@ export default function MainContent({ selectedId }: Props) {
     return (
         <Box
             minHeight="auto"
-            sx={{ overflow: "auto", px: 5, pt:3.75}}
+            sx={{
+                overflow: "auto",
+                px: 5,
+                pt:3.75
+            }}
         >
-            <Container
+            <Paper
                 sx={{
                     p:3.75,
                     backgroundColor: "#F5F8FA",
@@ -51,7 +55,7 @@ export default function MainContent({ selectedId }: Props) {
                 <Box>
                     <Typography variant="body1">{content.body}</Typography>
                 </Box>
-            </Container>
+            </Paper>
         </Box>
     )
 }
