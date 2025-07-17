@@ -8,9 +8,10 @@ export default function Footer(){
             justifyContent="space-between"
             alignItems="center"
             height="64px"
+            bottom={0}
             sx={{backgroundColor: "#4CB3F8",
-                width:"calc(100% + 40px )",
-                px:"5"
+                width: "100%",
+                px: 5,
             }}
         >
                 <Typography variant="body2">Copyright © 2021 Sample</Typography>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { fetchContent } from "@/lib/api"
 import type { Content } from "@/lib/types"
-import { Box, Typography } from "@mui/material"
+import { Box, Container, Typography } from "@mui/material"
 
 type Props = {
     selectedId: number | null
@@ -31,10 +31,12 @@ export default function MainContent({ selectedId }: Props) {
     return (
         <Box
             minHeight="auto"
-            sx={{ overflow: "auto", px: 5, }}
+            sx={{ overflow: "auto", px: 5, pt:3.75}}
         >
-            <Typography variant="h4" gutterBottom>{content.title}</Typography>
-            <Typography variant="body1">{content.body}</Typography>
+            <Container>
+                <Typography variant="h4" gutterBottom>{content.title}</Typography>
+                <Typography variant="body1">{content.body}</Typography>
+            </Container>
         </Box>
     )
 }
