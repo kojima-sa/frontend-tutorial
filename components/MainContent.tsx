@@ -21,7 +21,13 @@ export default function MainContent({ selectedId }: Props) {
     }, [selectedId])
 
     if (selectedId === null) {
-        return <Typography variant="h6">項目を選択してください</Typography>
+        return(
+            <Box>
+                <Typography variant="h6">
+                    項目を選択してください
+                </Typography>
+            </Box>
+        )
     }
 
     if (!content) {
@@ -33,9 +39,18 @@ export default function MainContent({ selectedId }: Props) {
             minHeight="auto"
             sx={{ overflow: "auto", px: 5, pt:3.75}}
         >
-            <Container>
-                <Typography variant="h4" gutterBottom>{content.title}</Typography>
-                <Typography variant="body1">{content.body}</Typography>
+            <Container
+                sx={{
+                    p:3.75,
+                    backgroundColor: "#F5F8FA",
+                }}
+            >
+                <Box>
+                    <Typography variant="h4" gutterBottom>{content.title}</Typography>
+                </Box>
+                <Box>
+                    <Typography variant="body1">{content.body}</Typography>
+                </Box>
             </Container>
         </Box>
     )

@@ -13,7 +13,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <Box
             display="flex"
             height="100vh"
-            sx={{ pxz: 5,}}
+            sx={{ px: 5,}}
         >
             <Sidebar selectedId={selectedId} setSelectedId={setSelectedId} />
             <Box

@@ -9,7 +9,7 @@ export default function Footer(){
             alignItems="center"
             height="64px"
             bottom={0}
-            sx={{backgroundColor: "#4CB3F8",
+            sx={{
                 width: "100%",
                 px: 5,
             }}
