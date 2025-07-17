@@ -1,10 +1,13 @@
 import { fetchContents } from "@/lib/api"
+import {
+    Box, Container, Button, Typography
+} from "@mui/material"
 
 export default async function Home() {
   const contents = await fetchContents();
 
   return (
-    <main>
+    <Box>
       <h1>コンテンツ一覧</h1>
         <ul>
           {contents.map((item) => (
@@ -14,6 +17,6 @@ export default async function Home() {
             </li>
           ))}
         </ul>
-    </main>
+    </Box>
   )
 }

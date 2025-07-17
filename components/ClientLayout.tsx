@@ -1,29 +1,29 @@
 "use client"
 
 import { useState } from "react"
-import { Box, Typography } from "@mui/material"
+import { Box } from "@mui/material"
 import Sidebar from "@/components/Sidebar"
 import MainContent from "@/components/MainContent"
+import Footer from "@/components/Footer";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
     const [selectedId, setSelectedId] = useState<number | null>(null)
 
     return (
-        <Box display="flex" height="100vh">
+        <Box
+            display="flex"
+            height="100vh"
+            sx={{ pl: 5,}}
+        >
             <Sidebar selectedId={selectedId} setSelectedId={setSelectedId} />
-            <Box component="main" flex={1} p={2} sx={{ overflow: "auto" }}>
+            <Box
+                component="main"
+                display="grid"
+                flexDirection="column"
+                flex={1}
+            >
                 <MainContent selectedId={selectedId} />
-                    {children}
-                <Box
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    px={5}
-                    mt={2}
-                >
-                    <Typography variant="body2">Copyright © 2021 Sample</Typography>
-                    <Typography variant="body2">運営会社</Typography>
-                </Box>
+                <Footer />
             </Box>
         </Box>
     )

@@ -76,7 +76,10 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
                         </IconButton>
                     )}
                     >
-                        <ListItemButton>
+                        <ListItemButton
+                            selected={selectedId === item.id}
+                            onClick={() => setSelectedId(item.id)}
+                        >
                             <ListItemText
                                 primary={item.title}
                                 primaryTypographyProps={{
