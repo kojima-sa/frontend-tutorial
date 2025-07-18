@@ -12,7 +12,6 @@ export default function Footer(){
             sx={{
                 width: "100%",
                 pl: 5,
-                mt: 3.75,
             }}
         >
                 <Typography variant="body2">Copyright © 2021 Sample</Typography>

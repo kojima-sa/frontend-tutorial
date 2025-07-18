@@ -12,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import Image from "next/image"
 import type { Content } from "@/lib/types"
 import { fetchContents } from "@/lib/api"
+import CustomIconButton from "@/components/CustomIconButton";
 
 type Props = {
     selectedId: number | null;
@@ -42,10 +43,10 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
             flexDirection="column"
             height="100vh"
             sx={{ borderRight: '1px solid #F5F8FA',
-                pr: 1.25,
                 height: "100vh",
                 position: "sticky",
                 top: 0,
+                pl:"40px"
             }}
         >
         {/* ロゴ＋会社名 */}
@@ -74,7 +75,8 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
                             edge="end"
                             aria-label="delete"
                             sx={{
-                                    pl:"10px"
+                                    pr:"10px",
+                                    overflow: "auto",
                             }}
                         >
                             <DeleteIcon/>
@@ -90,7 +92,7 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
                                 primaryTypographyProps={{
                                     sx: {
                                         fontSize: "16px",
-                                        height:"44px",
+                                        pr:"10px",
                                         display: "flex",
                                         alignItems: "center",
                                     }
@@ -102,102 +104,36 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
             </List>
 
 
-            <Box mt="auto" >
+            <Box mt="auto" sx={{ width: "100%" }} >
                 <Box
                     sx={{
                         backgroundColor: "#F5F8FA",
-                        width:"calc(100% + 40px + 10px)",
+                        width: "calc(100% + 40px)",
                         ml:"-40px",
-                        mr:"-10px",
                         display:"flex" ,
                         justifyContent: editMode ? "space-between" : "flex-end",
                         alignItems: "center",
                     }}
                 >
                     {!editMode ? (
-                    <Button
-                        onClick={() => setEditMode(true)}
-                        variant="contained"
-                        sx={{
-                            backgroundColor: "#4CB3F8",
-                            color:"white",
-                            minWidth: 40,
-                            flexDirection: "column",
-                            textTransform: "none",
-                            px: 4,
-                            m:1.25
-                        }}
-                    >
-                        <EditIcon
-                            sx={{
-                                height:"24px",
-                                width:"24px"
-                            }}
+                        <CustomIconButton
+                            icon={<EditIcon sx={{ height: 24, width: 24, }} />}
+                            label="Edit"
+                            onClick={() => setEditMode(true)}
                         />
-                        <Typography
-                            sx={{
-                                fontSize:"10px"
-                            }}
-                        >
-                            Edit
-                        </Typography>
-                    </Button>
                     ) : (
                     <>
-                    <Button
+                    <CustomIconButton
+                        icon={<AddIcon sx={{ height: 24, width: 24 }} />}
+                        label="New page"
                         variant="outlined"
-                        sx={{
-                            backgroundColor: "white",
-                            color:"#4CB3F8",
-                            minWidth: "40px",
-                            height:"40px",
-                            flexDirection: "column",
-                            textTransform: "none",
-                            p: 3,
-                            ml:5
-                        }}
-                    >
-                        <AddIcon
-                            sx={{
-                                height:"24px",
-                                width:"24px",
-                            }}
-                        />
-                        <Typography
-                            sx={{
-                                fontSize:"10px"
-                            }}
-                        >
-                            New page
-                        </Typography>
-                    </Button>
-                    <Button
+                        
+                    />
+                    <CustomIconButton
+                        icon={<DoneIcon sx={{ height: 24, width: 24 }} />}
+                        label="Done"
                         onClick={() => setEditMode(false)}
-                        variant="contained"
-                        sx={{
-                            backgroundColor: "#4CB3F8",
-                            color:"white",
-                            minWidth: 40,
-                            flexDirection: "column",
-                            textTransform: "none",
-                            px: 4,
-                            m:1.25
-                        }}
-                    >
-                        <DoneIcon
-                            sx={{
-                                height:"24px",
-                                width:"24px",
-                            }}
-                        />
-                        <Typography
-                            sx={{
-                                fontSize:"10px"
-                            }}
-                        >
-                            Done
-                        </Typography>
-                    </Button>
+                    />
                     </>
                     )}
                 </Box>

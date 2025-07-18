@@ -5,6 +5,7 @@ import { fetchContent } from "@/lib/api"
 import type { Content } from "@/lib/types"
 import { Box, Typography, Paper } from "@mui/material"
 
+
 type Props = {
     selectedId: number | null
 }
@@ -48,11 +49,31 @@ export default function MainContent({ selectedId }: Props) {
                     backgroundColor: "#F5F8FA",
                 }}
             >
-                <Box>
-                    <Typography variant="h4" gutterBottom>{content.title}</Typography>
+                <Box
+                    sx={{
+                        pl: 3.75,
+                        pb: 2.5,
+                    }}
+                >
+                    <Typography
+                        variant="h5"
+                        gutterBottom>{content.title}
+                    </Typography>
                 </Box>
                 <Box>
-                    <Typography variant="body1">{content.body}</Typography>
+                    <Box
+                        sx={{
+                            backgroundColor:"white",
+                            p: 3.75,
+                        }}
+                    >
+                        <Typography
+                            variant="body1"
+                            sx={{ whiteSpace: "pre-line" }}
+                        >
+                            {content.body}
+                        </Typography>
+                    </Box>
                 </Box>
             </Paper>
         </Box>
