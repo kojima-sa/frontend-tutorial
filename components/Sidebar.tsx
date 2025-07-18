@@ -41,7 +41,12 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
             display="flex"
             flexDirection="column"
             height="100vh"
-            sx={{ borderRight: '1px solid #F5F8FA', pl: 5, pr: 1.25, }}
+            sx={{ borderRight: '1px solid #F5F8FA',
+                pr: 1.25,
+                height: "100vh",
+                position: "sticky",
+                top: 0,
+            }}
         >
         {/* ロゴ＋会社名 */}
             <Box

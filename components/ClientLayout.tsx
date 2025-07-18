@@ -15,16 +15,31 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             height="100vh"
             sx={{ px: 5,}}
         >
-            <Sidebar selectedId={selectedId} setSelectedId={setSelectedId} />
+            <Box
+                sx={{
+                    position:"sticky",
+                    height: "100vh",
+                    overflowY: "auto",
+                    alignSelf: "flex-start",
+                    top:"0",
+                }}
+            >
+                <Sidebar selectedId={selectedId} setSelectedId={setSelectedId} />
+            </Box>
             <Box
                 component="main"
-                display="grid"
+                display="flex"
                 flexDirection="column"
                 flex={1}
+                sx={{ minHeight: "100vh" }}
             >
-                <MainContent selectedId={selectedId} />
-                <Footer />
+                <Box sx={{ flexGrow: 1 }}>
+                    <MainContent selectedId={selectedId} />
+                </Box>
+                <Box>
+                    <Footer />
+                </Box>
             </Box>
         </Box>
-    )
+    );
 }

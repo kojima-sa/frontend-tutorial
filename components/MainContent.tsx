@@ -36,7 +36,6 @@ export default function MainContent({ selectedId }: Props) {
 
     return (
         <Box
-            minHeight="auto"
             sx={{
                 overflow: "auto",
                 px: 5,
