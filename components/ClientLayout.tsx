@@ -20,7 +20,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 sx={{
                     position:"sticky",
                     height: "100vh",
-                    
                     alignSelf: "flex-start",
                     top:"0",
                 }}

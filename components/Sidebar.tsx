@@ -79,7 +79,7 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
                                     overflow: "auto",
                             }}
                         >
-                            <DeleteIcon/>
+                            <DeleteIcon />
                         </IconButton>
                     )}
                     >
@@ -127,7 +127,7 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
                         icon={<AddIcon sx={{ height: 24, width: 24 }} />}
                         label="New page"
                         variant="outlined"
-                        
+                        //onClick={() => }
                     />
                     <CustomIconButton
                         icon={<DoneIcon sx={{ height: 24, width: 24 }} />}

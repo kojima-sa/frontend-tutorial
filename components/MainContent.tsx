@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { fetchContent } from "@/lib/api"
 import type { Content } from "@/lib/types"
 import { Box, Typography, Paper } from "@mui/material"
+import EditIcon from "@mui/icons-material/Edit"
+import CustomIconButton from "@/components/CustomIconButton";
 
 
 type Props = {
@@ -38,7 +40,6 @@ export default function MainContent({ selectedId }: Props) {
     return (
         <Box
             sx={{
-                overflow: "auto",
                 px: 5,
                 pt:3.75
             }}
@@ -53,18 +54,35 @@ export default function MainContent({ selectedId }: Props) {
                     sx={{
                         pl: 3.75,
                         pb: 2.5,
+                        display:"flex",
+                        justifyContent:"space-between"
                     }}
                 >
-                    <Typography
-                        variant="h5"
-                        gutterBottom>{content.title}
-                    </Typography>
+                    <Box>
+                        <Typography
+                            variant="h5"
+                            gutterBottom>{content.title}
+                        </Typography>
+                    </Box>
+                    <Box sx={{pl:"30px"}}>
+                        <CustomIconButton
+                            icon={<EditIcon sx={{ height: 24, width: 24, }} />}
+                            label="Edit"
+                            //onClick={}
+                        />
+                    </Box>
                 </Box>
-                <Box>
+                <Box
+                    sx={{
+                        display:"flex",
+                        justifyContent:"space-between",
+                    }}
+                >
                     <Box
                         sx={{
                             backgroundColor:"white",
                             p: 3.75,
+                            overflow: "auto",
                         }}
                     >
                         <Typography
@@ -73,6 +91,13 @@ export default function MainContent({ selectedId }: Props) {
                         >
                             {content.body}
                         </Typography>
+                    </Box>
+                    <Box sx={{pl:"30px"}}>
+                        <CustomIconButton
+                            icon={<EditIcon sx={{ height: 24, width: 24, }} />}
+                            label="Edit"
+                            //onClick={}
+                        />
                     </Box>
                 </Box>
             </Paper>
