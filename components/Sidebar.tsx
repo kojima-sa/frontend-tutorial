@@ -21,6 +21,8 @@ type Props = {
 
 export default function Sidebar({ selectedId, setSelectedId,}: Props) {
     const [editMode, setEditMode] = useState(false)
+    const [titleEditMode, setTitleEditMode] = useState(false);
+    const [bodyEditMode, setBodyEditMode] = useState(false);
     const [contents, setContents] = useState<Content[]>([])
 
     //新規作成
@@ -115,7 +117,11 @@ export default function Sidebar({ selectedId, setSelectedId,}: Props) {
                     >
                         <ListItemButton
                             selected={selectedId === item.id}
-                            onClick={() => setSelectedId(item.id)}
+                            onClick={() => {
+                                setSelectedId(item.id);
+                                setTitleEditMode(false);
+                                setBodyEditMode(false);
+                            }}
                             sx={{
                                 backgroundColor: selectedId === item.id ? "#F5F8FA" : "transparent",
                                 color: selectedId === item.id ? "#32A8F8" : "black",
@@ -155,6 +161,7 @@ export default function Sidebar({ selectedId, setSelectedId,}: Props) {
                         <CustomIconButton
                             icon={<EditIcon sx={{ height: 24, width: 24, }} />}
                             label="Edit"
+                            sx={{px: 4, m: 1.25,}}
                             onClick={() => setEditMode(true)}
                         />
                     ) : (
@@ -163,11 +170,13 @@ export default function Sidebar({ selectedId, setSelectedId,}: Props) {
                         icon={<AddIcon sx={{ height: 24, width: 24 }} />}
                         label="New page"
                         variant="outlined"
+                        sx={{px: 4, m: 1.25,}}
                         onClick={() => handleCreate()}
                     />
                     <CustomIconButton
                         icon={<DoneIcon sx={{ height: 24, width: 24 }} />}
                         label="Done"
+                        sx={{px: 4, m: 1.25,}}
                         onClick={() => setEditMode(false)}
                     />
                     </>

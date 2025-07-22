@@ -29,8 +29,6 @@ export default function CustomIconButton({
                 minWidth: 40,
                 flexDirection: "column",
                 textTransform: "none",
-                px: 4,
-                m: 1.25,
                 ...sx,
             }}
         >

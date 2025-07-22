@@ -24,10 +24,23 @@ export async function createContent(content: { title: string; content: string })
     return res.json()
 }
 
-//編集
-export async function updateContent(
+//タイトル編集
+export async function titleUpdateContent(
     id: number,
-    content: { title: string; content: string }
+    content: { title: string }
+) {
+    const res = await fetch(`${BASE_URL}/content/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(content),
+    })
+    return res.json()
+}
+
+//本文編集
+export async function bodyUpdateContent(
+    id: number,
+    content: { content: string }
 ) {
     const res = await fetch(`${BASE_URL}/content/${id}`, {
         method: "PATCH",
