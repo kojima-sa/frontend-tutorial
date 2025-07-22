@@ -17,6 +17,8 @@ type Props = {
 
 export default function MainContent({ selectedId }: Props) {
     const [content, setContent] = useState<Content | null>(null)
+    const [editTitleMode, setTitleEditMode] = useState(false);
+    const [bodyEditMode, setBodyEditMode] = useState(false);
 
     useEffect(() => {
         if (selectedId !== null) {
@@ -73,12 +75,30 @@ export default function MainContent({ selectedId }: Props) {
                             gutterBottom>{content.title}
                         </Typography>
                     </Box>
-                    <Box sx={{pl:"20px"}}>
-                        <CustomIconButton
+                    <Box
+                        sx={{pl:"20px",}}
+                    >
+                        {!editTitleMode ? (
+                            <CustomIconButton
                             icon={<EditIcon sx={{ height: 24, width: 24, }} />}
                             label="Edit"
-                            //onClick={}
+                            onClick={() => setTitleEditMode(true)}
+                            sx={{px: 4, m: 1.25,}}
                         />
+                        ) : (
+                        <>
+                        <CustomIconButton
+                            icon={<CloseIcon sx={{ height: 24, width: 24, }} />}
+                            sx={{m: "10px", backgroundColor:"#cccccc",}}
+                            label="Cancel"
+                            onClick={() => setTitleEditMode(false)}
+                        />
+                        <CustomIconButton
+                            icon={<SaveIcon sx={{ height: 24, width: 24, }} />}
+                            label="Save"
+                        />
+                        </>
+                        )}
                     </Box>
                 </Box>
                 <Box
@@ -92,19 +112,21 @@ export default function MainContent({ selectedId }: Props) {
                             backgroundColor:"#FFFFFF",
                             p: 3.75,
                             overflow: "auto",
+                            width: "100%",
                         }}
                     >
                         <Typography
                             variant="body1"
                             sx={{ whiteSpace: "pre-line" }}
                         >
-                            {content.body}
+                            {content.body || "本文を入力してください"}
                         </Typography>
                     </Box>
                     <Box sx={{pl:"20px"}}>
                         <CustomIconButton
                             icon={<EditIcon sx={{ height: 24, width: 24, }} />}
                             label="Edit"
+                            sx={{px: 4, m: 1.25,}}
                             //onClick={}
                         />
                     </Box>

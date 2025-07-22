@@ -9,6 +9,8 @@ import Footer from "@/components/Footer";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
     const [selectedId, setSelectedId] = useState<number | null>(null)
+    const [titleEditMode, setTitleEditMode] = useState(false);
+    const [bodyEditMode, setBodyEditMode] = useState(false);
 
     return (
         <Box
@@ -24,7 +26,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                     top:"0",
                 }}
             >
-                <Sidebar selectedId={selectedId} setSelectedId={setSelectedId} />
+                <Sidebar
+                    selectedId={selectedId}
+                    setSelectedId={setSelectedId}
+                    />
             </Box>
             <Box
                 component="main"

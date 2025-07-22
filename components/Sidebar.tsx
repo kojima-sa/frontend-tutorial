@@ -16,13 +16,16 @@ import { deleteContent, fetchContents, createContent } from "@/lib/api"
 
 type Props = {
     selectedId: number | null;
-    setSelectedId: (id: number) => void;
+    setSelectedId: (id: number| null) => void;
 };
 
 export default function Sidebar({ selectedId, setSelectedId,}: Props) {
     const [editMode, setEditMode] = useState(false)
+    const [titleEditMode, setTitleEditMode] = useState(false);
+    const [bodyEditMode, setBodyEditMode] = useState(false);
     const [contents, setContents] = useState<Content[]>([])
 
+    //新規作成
     const handleCreate = async() =>{
         const newContent = await createContent({
             title: "新規メモ",
@@ -34,18 +37,22 @@ export default function Sidebar({ selectedId, setSelectedId,}: Props) {
         setContents(prev => [...prev, newContent])
     }
 
+    //削除
     const id = selectedId;
     const handleDelete = async(id: number) => {
-    const confirmDelete = window.confirm("本当に削除しますか？");
-        if (!confirmDelete) return;
-        if (id === null) return;
-        await deleteContent(id)
-        console.log("削除");
+        const confirmDelete = window.confirm("本当に削除しますか？");
+            if (!confirmDelete) return;
+            if (id === null) return;
+            await deleteContent(id)
+            console.log("削除");
 
-    const updated = await fetchContents();
-    setContents(updated);
+        setContents(prev => prev.filter(item => item.id !== id));
+        if (selectedId === id) {
+            setSelectedId(null);
+        }
     }
 
+    //タイトル一覧取得
     useEffect(() => {
         const loadContents = async () => {
             try {
@@ -110,7 +117,11 @@ export default function Sidebar({ selectedId, setSelectedId,}: Props) {
                     >
                         <ListItemButton
                             selected={selectedId === item.id}
-                            onClick={() => setSelectedId(item.id)}
+                            onClick={() => {
+                                setSelectedId(item.id);
+                                setTitleEditMode(false);
+                                setBodyEditMode(false);
+                            }}
                             sx={{
                                 backgroundColor: selectedId === item.id ? "#F5F8FA" : "transparent",
                                 color: selectedId === item.id ? "#32A8F8" : "black",
@@ -150,6 +161,7 @@ export default function Sidebar({ selectedId, setSelectedId,}: Props) {
                         <CustomIconButton
                             icon={<EditIcon sx={{ height: 24, width: 24, }} />}
                             label="Edit"
+                            sx={{px: 4, m: 1.25,}}
                             onClick={() => setEditMode(true)}
                         />
                     ) : (
@@ -158,11 +170,13 @@ export default function Sidebar({ selectedId, setSelectedId,}: Props) {
                         icon={<AddIcon sx={{ height: 24, width: 24 }} />}
                         label="New page"
                         variant="outlined"
+                        sx={{px: 4, m: 1.25,}}
                         onClick={() => handleCreate()}
                     />
                     <CustomIconButton
                         icon={<DoneIcon sx={{ height: 24, width: 24 }} />}
                         label="Done"
+                        sx={{px: 4, m: 1.25,}}
                         onClick={() => setEditMode(false)}
                     />
                     </>

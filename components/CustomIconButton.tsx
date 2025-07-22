@@ -8,7 +8,7 @@ type Props = {
     icon: React.ReactNode
     label: string
     onClick?: () => void
-    variant?: "contained" | "outlined" | "text"
+    variant?: "contained" | "outlined"
     sx?: SxProps<Theme>
 }
 
@@ -29,8 +29,6 @@ export default function CustomIconButton({
                 minWidth: 40,
                 flexDirection: "column",
                 textTransform: "none",
-                px: 4,
-                m: 1.25,
                 ...sx,
             }}
         >
