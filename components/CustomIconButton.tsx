@@ -8,7 +8,7 @@ type Props = {
     icon: React.ReactNode
     label: string
     onClick?: () => void
-    variant?: "contained" | "outlined" | "text"
+    variant?: "contained" | "outlined"
     sx?: SxProps<Theme>
 }
 

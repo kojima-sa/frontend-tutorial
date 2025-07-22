@@ -16,13 +16,14 @@ import { deleteContent, fetchContents, createContent } from "@/lib/api"
 
 type Props = {
     selectedId: number | null;
-    setSelectedId: (id: number) => void;
+    setSelectedId: (id: number| null) => void;
 };
 
 export default function Sidebar({ selectedId, setSelectedId,}: Props) {
     const [editMode, setEditMode] = useState(false)
     const [contents, setContents] = useState<Content[]>([])
 
+    //新規作成
     const handleCreate = async() =>{
         const newContent = await createContent({
             title: "新規メモ",
@@ -34,18 +35,22 @@ export default function Sidebar({ selectedId, setSelectedId,}: Props) {
         setContents(prev => [...prev, newContent])
     }
 
+    //削除
     const id = selectedId;
     const handleDelete = async(id: number) => {
-    const confirmDelete = window.confirm("本当に削除しますか？");
-        if (!confirmDelete) return;
-        if (id === null) return;
-        await deleteContent(id)
-        console.log("削除");
+        const confirmDelete = window.confirm("本当に削除しますか？");
+            if (!confirmDelete) return;
+            if (id === null) return;
+            await deleteContent(id)
+            console.log("削除");
 
-    const updated = await fetchContents();
-    setContents(updated);
+        setContents(prev => prev.filter(item => item.id !== id));
+        if (selectedId === id) {
+            setSelectedId(null);
+        }
     }
 
+    //タイトル一覧取得
     useEffect(() => {
         const loadContents = async () => {
             try {

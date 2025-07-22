@@ -92,13 +92,14 @@ export default function MainContent({ selectedId }: Props) {
                             backgroundColor:"#FFFFFF",
                             p: 3.75,
                             overflow: "auto",
+                            width: "100%",
                         }}
                     >
                         <Typography
                             variant="body1"
                             sx={{ whiteSpace: "pre-line" }}
                         >
-                            {content.body}
+                            {content.body || "本文を入力してください"}
                         </Typography>
                     </Box>
                     <Box sx={{pl:"20px"}}>
