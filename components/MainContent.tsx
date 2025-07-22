@@ -5,6 +5,9 @@ import { fetchContent } from "@/lib/api"
 import type { Content } from "@/lib/types"
 import { Box, Typography, Container } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
+import CloseIcon from '@mui/icons-material/Close';
+import SaveIcon from '@mui/icons-material/Save';
+
 import CustomIconButton from "@/components/CustomIconButton";
 
 

@@ -22,17 +22,28 @@ type Props = {
 export default function Sidebar({ selectedId, setSelectedId,}: Props) {
     const [editMode, setEditMode] = useState(false)
     const [contents, setContents] = useState<Content[]>([])
+
     const handleCreate = async() =>{
         const newContent = await createContent({
             title: "新規メモ",
             content: "",
         })
         setSelectedId(newContent.id)
+        console.log("新規作成");
+
+        setContents(prev => [...prev, newContent])
     }
+
     const id = selectedId;
-    const handleDelete = async() => {
+    const handleDelete = async(id: number) => {
+    const confirmDelete = window.confirm("本当に削除しますか？");
+        if (!confirmDelete) return;
         if (id === null) return;
         await deleteContent(id)
+        console.log("削除");
+
+    const updated = await fetchContents();
+    setContents(updated);
     }
 
     useEffect(() => {
@@ -46,7 +57,8 @@ export default function Sidebar({ selectedId, setSelectedId,}: Props) {
             }
 
         loadContents()
-    }, [])
+    }, []
+)
 
     return (
         <Box
@@ -86,6 +98,7 @@ export default function Sidebar({ selectedId, setSelectedId,}: Props) {
                         <IconButton
                             edge="end"
                             aria-label="delete"
+                            onClick={() => handleDelete(item.id)}
                             sx={{
                                     pr:"10px",
                                     overflow: "auto",
