@@ -3,26 +3,37 @@
 import { useState, useEffect } from "react"
 import {
     Box, List, ListItem, ListItemButton, ListItemText,
-    IconButton, Button, Typography,
-    colors
-} from "@mui/material"
+    IconButton, Typography, } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import DoneIcon from "@mui/icons-material/Done"
 import AddIcon from "@mui/icons-material/Add"
 import DeleteIcon from "@mui/icons-material/Delete"
+import CustomIconButton from "@/components/CustomIconButton";
 import Image from "next/image"
 import type { Content } from "@/lib/types"
-import { fetchContents } from "@/lib/api"
-import CustomIconButton from "@/components/CustomIconButton";
+import { deleteContent, fetchContents, createContent } from "@/lib/api"
+
 
 type Props = {
     selectedId: number | null;
     setSelectedId: (id: number) => void;
 };
 
-export default function Sidebar({ selectedId, setSelectedId }: Props) {
+export default function Sidebar({ selectedId, setSelectedId,}: Props) {
     const [editMode, setEditMode] = useState(false)
     const [contents, setContents] = useState<Content[]>([])
+    const handleCreate = async() =>{
+        const newContent = await createContent({
+            title: "新規メモ",
+            content: "",
+        })
+        setSelectedId(newContent.id)
+    }
+    const id = selectedId;
+    const handleDelete = async() => {
+        if (id === null) return;
+        await deleteContent(id)
+    }
 
     useEffect(() => {
         const loadContents = async () => {
@@ -101,8 +112,8 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
                                         pr:"10px",
                                         display: "flex",
                                         alignItems: "center",
-                                    }
-                                }}
+                                }
+                            }}
                             />
                         </ListItemButton>
                     </ListItem>
@@ -134,7 +145,7 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
                         icon={<AddIcon sx={{ height: 24, width: 24 }} />}
                         label="New page"
                         variant="outlined"
-                        //onClick={() => }
+                        onClick={() => handleCreate()}
                     />
                     <CustomIconButton
                         icon={<DoneIcon sx={{ height: 24, width: 24 }} />}
