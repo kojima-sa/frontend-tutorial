@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { fetchContent } from "@/lib/api"
 import type { Content } from "@/lib/types"
-import { Box, Typography, Paper } from "@mui/material"
+import { Box, Typography, Container } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import CustomIconButton from "@/components/CustomIconButton";
 
@@ -44,7 +44,7 @@ export default function MainContent({ selectedId }: Props) {
                 pt:3.75
             }}
         >
-            <Paper
+            <Container
                 sx={{
                     p:3.75,
                     backgroundColor: "#F5F8FA",
@@ -55,16 +55,22 @@ export default function MainContent({ selectedId }: Props) {
                         pl: 3.75,
                         pb: 2.5,
                         display:"flex",
-                        justifyContent:"space-between"
+                        justifyContent:"space-between",
                     }}
                 >
-                    <Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
                         <Typography
                             variant="h5"
+                            fontWeight="bold"
                             gutterBottom>{content.title}
                         </Typography>
                     </Box>
-                    <Box sx={{pl:"30px"}}>
+                    <Box sx={{pl:"20px"}}>
                         <CustomIconButton
                             icon={<EditIcon sx={{ height: 24, width: 24, }} />}
                             label="Edit"
@@ -80,7 +86,7 @@ export default function MainContent({ selectedId }: Props) {
                 >
                     <Box
                         sx={{
-                            backgroundColor:"white",
+                            backgroundColor:"#FFFFFF",
                             p: 3.75,
                             overflow: "auto",
                         }}
@@ -92,7 +98,7 @@ export default function MainContent({ selectedId }: Props) {
                             {content.body}
                         </Typography>
                     </Box>
-                    <Box sx={{pl:"30px"}}>
+                    <Box sx={{pl:"20px"}}>
                         <CustomIconButton
                             icon={<EditIcon sx={{ height: 24, width: 24, }} />}
                             label="Edit"
@@ -100,7 +106,7 @@ export default function MainContent({ selectedId }: Props) {
                         />
                     </Box>
                 </Box>
-            </Paper>
+            </Container>
         </Box>
     )
 }

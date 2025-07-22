@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react"
 import {
     Box, List, ListItem, ListItemButton, ListItemText,
-    IconButton, Button, Typography
+    IconButton, Button, Typography,
+    colors
 } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import DoneIcon from "@mui/icons-material/Done"
@@ -86,11 +87,16 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
                         <ListItemButton
                             selected={selectedId === item.id}
                             onClick={() => setSelectedId(item.id)}
+                            sx={{
+                                backgroundColor: selectedId === item.id ? "#F5F8FA" : "transparent",
+                                color: selectedId === item.id ? "#32A8F8" : "black",
+                            }}
                         >
                             <ListItemText
                                 primary={item.title}
                                 primaryTypographyProps={{
                                     sx: {
+                                        fontWeight: selectedId === item.id ? "bold" : "normal",
                                         fontSize: "16px",
                                         pr:"10px",
                                         display: "flex",
@@ -110,6 +116,7 @@ export default function Sidebar({ selectedId, setSelectedId }: Props) {
                         backgroundColor: "#F5F8FA",
                         width: "calc(100% + 40px)",
                         ml:"-40px",
+                        pl:"40px",
                         display:"flex" ,
                         justifyContent: editMode ? "space-between" : "flex-end",
                         alignItems: "center",
