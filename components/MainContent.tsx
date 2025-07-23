@@ -1,15 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { fetchContent } from "@/lib/api"
+import { fetchContent, titleUpdateContent, bodyUpdateContent } from "@/lib/api"
 import type { Content } from "@/lib/types"
 import { Box, Typography, Container, TextField } from "@mui/material"
-import EditIcon from "@mui/icons-material/Edit"
-import CloseIcon from '@mui/icons-material/Close';
-import SaveIcon from '@mui/icons-material/Save';
-
-import CustomIconButton from "@/components/CustomIconButton";
-import EditToggleButtons from "./EditToggleButtons"
+import EditToggleButtons from "./pageEdit/EditToggleButtons"
 
 type Props = {
     selectedId: number | null
@@ -27,6 +22,9 @@ export default function MainContent({
     setBodyEditMode
 }: Props) {
     const [content, setContent] = useState<Content | null>(null)
+    const id = selectedId;
+    const handleTitleEdit = async(id: number) => {}
+    const handleBodyEdit = async(id: number) => {}
 
     useEffect(() => {
         if (selectedId !== null) {
@@ -83,11 +81,19 @@ export default function MainContent({
                             gutterBottom>{content.title}
                         </Typography>
                     </Box>
-                    <EditToggleButtons
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
+                        <EditToggleButtons
                         isEditMode={titleEditMode}
                         onEnterEdit={() => setTitleEditMode(true)}
                         onCancelEdit={() => setTitleEditMode(false)}
-                    />
+                        //onSaveEdit={() => }
+                        />
+                    </Box>
                 </Box>
                 <Box
                     sx={{
@@ -110,11 +116,12 @@ export default function MainContent({
                             {content.body || "本文を入力してください"}
                         </Typography>
                     </Box>
-                    <EditToggleButtons
+                        <EditToggleButtons
                         isEditMode={bodyEditMode}
                         onEnterEdit={() => setBodyEditMode(true)}
                         onCancelEdit={() => setBodyEditMode(false)}
-                    />
+                        //onSaveEdit={() => }
+                        />
                 </Box>
             </Container>
         </Box>
