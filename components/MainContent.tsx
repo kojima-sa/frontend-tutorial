@@ -3,22 +3,30 @@
 import { useEffect, useState } from "react"
 import { fetchContent } from "@/lib/api"
 import type { Content } from "@/lib/types"
-import { Box, Typography, Container } from "@mui/material"
+import { Box, Typography, Container, TextField } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 
 import CustomIconButton from "@/components/CustomIconButton";
-
+import EditToggleButtons from "./EditToggleButtons"
 
 type Props = {
     selectedId: number | null
+    setTitleEditMode: (value: boolean) => void;
+    titleEditMode:boolean
+    setBodyEditMode: (value: boolean) => void;
+    bodyEditMode: boolean
 }
 
-export default function MainContent({ selectedId }: Props) {
+export default function MainContent({
+    selectedId,
+    titleEditMode,
+    setTitleEditMode,
+    bodyEditMode,
+    setBodyEditMode
+}: Props) {
     const [content, setContent] = useState<Content | null>(null)
-    const [editTitleMode, setTitleEditMode] = useState(false);
-    const [bodyEditMode, setBodyEditMode] = useState(false);
 
     useEffect(() => {
         if (selectedId !== null) {
@@ -75,31 +83,11 @@ export default function MainContent({ selectedId }: Props) {
                             gutterBottom>{content.title}
                         </Typography>
                     </Box>
-                    <Box
-                        sx={{pl:"20px",}}
-                    >
-                        {!editTitleMode ? (
-                            <CustomIconButton
-                            icon={<EditIcon sx={{ height: 24, width: 24, }} />}
-                            label="Edit"
-                            onClick={() => setTitleEditMode(true)}
-                            sx={{px: 4, m: 1.25,}}
-                        />
-                        ) : (
-                        <>
-                        <CustomIconButton
-                            icon={<CloseIcon sx={{ height: 24, width: 24, }} />}
-                            sx={{m: "10px", backgroundColor:"#cccccc",}}
-                            label="Cancel"
-                            onClick={() => setTitleEditMode(false)}
-                        />
-                        <CustomIconButton
-                            icon={<SaveIcon sx={{ height: 24, width: 24, }} />}
-                            label="Save"
-                        />
-                        </>
-                        )}
-                    </Box>
+                    <EditToggleButtons
+                        isEditMode={titleEditMode}
+                        onEnterEdit={() => setTitleEditMode(true)}
+                        onCancelEdit={() => setTitleEditMode(false)}
+                    />
                 </Box>
                 <Box
                     sx={{
@@ -122,14 +110,11 @@ export default function MainContent({ selectedId }: Props) {
                             {content.body || "本文を入力してください"}
                         </Typography>
                     </Box>
-                    <Box sx={{pl:"20px"}}>
-                        <CustomIconButton
-                            icon={<EditIcon sx={{ height: 24, width: 24, }} />}
-                            label="Edit"
-                            sx={{px: 4, m: 1.25,}}
-                            //onClick={}
-                        />
-                    </Box>
+                    <EditToggleButtons
+                        isEditMode={bodyEditMode}
+                        onEnterEdit={() => setBodyEditMode(true)}
+                        onCancelEdit={() => setBodyEditMode(false)}
+                    />
                 </Box>
             </Container>
         </Box>

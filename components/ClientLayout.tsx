@@ -29,6 +29,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 <Sidebar
                     selectedId={selectedId}
                     setSelectedId={setSelectedId}
+                    setTitleEditMode={setTitleEditMode}
+                    setBodyEditMode={setBodyEditMode}
                     />
             </Box>
             <Box
@@ -39,7 +41,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 sx={{ minHeight: "100vh" }}
             >
                 <Box sx={{ flexGrow: 1 }}>
-                    <MainContent selectedId={selectedId} />
+                    <MainContent
+                        selectedId={selectedId}
+                        titleEditMode={titleEditMode}
+                        setTitleEditMode={setTitleEditMode}
+                        bodyEditMode={bodyEditMode}
+                        setBodyEditMode={setBodyEditMode}
+                    />
                 </Box>
                 <Box>
                     <Footer />

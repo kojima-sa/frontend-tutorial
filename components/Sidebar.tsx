@@ -17,12 +17,17 @@ import { deleteContent, fetchContents, createContent } from "@/lib/api"
 type Props = {
     selectedId: number | null;
     setSelectedId: (id: number| null) => void;
+    setTitleEditMode: (value: boolean) => void;
+    setBodyEditMode: (value: boolean) => void;
 };
 
-export default function Sidebar({ selectedId, setSelectedId,}: Props) {
+export default function Sidebar({
+    selectedId,
+    setSelectedId,
+    setTitleEditMode,
+    setBodyEditMode,
+}: Props) {
     const [editMode, setEditMode] = useState(false)
-    const [titleEditMode, setTitleEditMode] = useState(false);
-    const [bodyEditMode, setBodyEditMode] = useState(false);
     const [contents, setContents] = useState<Content[]>([])
 
     //新規作成
