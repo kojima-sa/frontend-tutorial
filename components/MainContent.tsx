@@ -22,9 +22,18 @@ export default function MainContent({
     setBodyEditMode
 }: Props) {
     const [content, setContent] = useState<Content | null>(null)
+    const [titleInput, setTitleInput] = useState("")
+    const [bodyInput, setBodyInput] = useState("")
     const id = selectedId;
     const handleTitleEdit = async(id: number) => {}
     const handleBodyEdit = async(id: number) => {}
+
+        useEffect(() => {
+        if (content) {
+            setTitleInput(content.title)
+            setBodyInput(content.body)
+        }
+    }, [content])
 
     useEffect(() => {
         if (selectedId !== null) {
@@ -33,8 +42,7 @@ export default function MainContent({
             setContent(null)
         }
     }, [selectedId])
-
-    if (selectedId === null) {
+        if (selectedId === null) {
         return(
             <Box>
                 <Typography variant="h6">
@@ -44,7 +52,7 @@ export default function MainContent({
         )
     }
 
-    if (!content) {
+        if (!content) {
         return <Typography>読み込み中...</Typography>
     }
 
@@ -63,24 +71,34 @@ export default function MainContent({
             >
                 <Box
                     sx={{
-                        pl: 3.75,
                         pb: 2.5,
                         display:"flex",
                         justifyContent:"space-between",
                     }}
                 >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            alignItems: "center",
-                        }}
-                    >
-                        <Typography
-                            variant="h5"
-                            fontWeight="bold"
-                            gutterBottom>{content.title}
-                        </Typography>
-                    </Box>
+                        { !titleEditMode ? (
+                            <Typography
+                                sx={{pl:"30px", py:"10px"}}
+                                variant="h5"
+                                fontWeight="bold"
+                                gutterBottom>{content.title}
+                            </Typography>
+                        ) : (
+                            <>
+                                <TextField
+                                    variant="outlined"
+                                    sx={{ backgroundColor:"#FFFFFF" }}
+                                    fullWidth
+                                    color="primary"
+                                    value={ titleInput }
+                                    onChange={(e) => setTitleInput(e.target.value)}
+                                    required
+                                    InputProps={{
+                                        sx:{ fontWeight:"bold", fontSize:"23px",pl:"20px" }
+                                    }}
+                                />
+                            </>
+                        )}
                     <Box
                         sx={{
                             display: "flex",
