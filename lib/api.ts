@@ -25,7 +25,7 @@ export async function createContent(content: { title: string; content: string })
 }
 
 //タイトル編集
-export async function titleUpdateContent(
+export async function titleUpdate(
     id: number,
     content: { title: string }
 ) {
@@ -38,7 +38,7 @@ export async function titleUpdateContent(
 }
 
 //本文編集
-export async function bodyUpdateContent(
+export async function bodyUpdate(
     id: number,
     content: { content: string }
 ) {

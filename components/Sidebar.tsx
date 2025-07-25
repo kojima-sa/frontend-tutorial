@@ -176,7 +176,12 @@ export default function Sidebar({
                         label="New page"
                         variant="outlined"
                         sx={{px: 4, m: 1.25,}}
-                        onClick={() => handleCreate()}
+                        onClick={() => {
+                            handleCreate()
+                            setTitleEditMode(true);
+                            setBodyEditMode(true);
+                        }}
+                        
                     />
                     <CustomIconButton
                         icon={<DoneIcon sx={{ height: 24, width: 24 }} />}

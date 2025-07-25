@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { fetchContent, titleUpdateContent, bodyUpdateContent } from "@/lib/api"
+import { fetchContent, titleUpdate, bodyUpdate } from "@/lib/api"
 import type { Content } from "@/lib/types"
-import { Box, Typography, Container, TextField } from "@mui/material"
+import { Box, Typography, Container, TextField, } from "@mui/material"
 import EditToggleButtons from "./pageEdit/EditToggleButtons"
 
 type Props = {
@@ -25,8 +25,10 @@ export default function MainContent({
     const [titleInput, setTitleInput] = useState("")
     const [bodyInput, setBodyInput] = useState("")
     const id = selectedId;
-    const handleTitleEdit = async(id: number) => {}
-    const handleBodyEdit = async(id: number) => {}
+    const handleTitleEdit = async(id: number) => {
+    }
+    const handleBodyEdit = async(id: number) => {
+    }
 
         useEffect(() => {
         if (content) {
@@ -76,29 +78,29 @@ export default function MainContent({
                         justifyContent:"space-between",
                     }}
                 >
-                        { !titleEditMode ? (
-                            <Typography
-                                sx={{pl:"30px", py:"10px"}}
-                                variant="h5"
-                                fontWeight="bold"
-                                gutterBottom>{content.title}
-                            </Typography>
-                        ) : (
-                            <>
-                                <TextField
-                                    variant="outlined"
-                                    sx={{ backgroundColor:"#FFFFFF" }}
-                                    fullWidth
-                                    color="primary"
-                                    value={ titleInput }
-                                    onChange={(e) => setTitleInput(e.target.value)}
-                                    required
-                                    InputProps={{
-                                        sx:{ fontWeight:"bold", fontSize:"23px",pl:"20px" }
-                                    }}
-                                />
-                            </>
-                        )}
+                    { !titleEditMode ? (
+                        <Typography
+                            sx={{pl:"30px", py:"10px"}}
+                            variant="h5"
+                            fontWeight="bold"
+                            gutterBottom>{content.title}
+                        </Typography>
+                    ) : (
+                        <>
+                            <TextField
+                                variant="outlined"
+                                sx={{ backgroundColor:"#FFFFFF" }}
+                                fullWidth
+                                color="primary"
+                                value={ titleInput }
+                                onChange={(e) => setTitleInput(e.target.value)}
+                                required
+                                InputProps={{
+                                    sx:{ fontWeight:"bold", fontSize:"23px",pl:"20px" }
+                                }}
+                            />
+                        </>
+                    )}
                     <Box
                         sx={{
                             display: "flex",
@@ -122,17 +124,35 @@ export default function MainContent({
                     <Box
                         sx={{
                             backgroundColor:"#FFFFFF",
-                            p: 3.75,
                             overflow: "auto",
                             width: "100%",
                         }}
                     >
-                        <Typography
-                            variant="body1"
-                            sx={{ whiteSpace: "pre-line" }}
-                        >
-                            {content.body || "本文を入力してください"}
-                        </Typography>
+                        { !bodyEditMode ? (
+                            <Typography
+                                variant="body1"
+                                sx={{ whiteSpace: "pre-line", p: 3.75, }}
+                            >
+                                {content.body || "本文を入力してください"}
+                            </Typography>
+                        ) : (
+                            <>
+                                <TextField
+                                    variant="outlined"
+                                    placeholder = "本文を入力してください"
+                                    sx={{ backgroundColor:"#FFFFFF"}}
+                                    fullWidth
+                                    multiline
+                                    color="primary"
+                                    value={ bodyInput }
+                                    onChange={(e) => setBodyInput(e.target.value)}
+                                    InputProps={{
+                                        sx:{ p:"30px" }
+                                    }}
+                                    required
+                                />
+                            </>
+                        )}
                     </Box>
                         <EditToggleButtons
                         isEditMode={bodyEditMode}
