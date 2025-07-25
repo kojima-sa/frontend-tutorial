@@ -34,7 +34,7 @@ export default function Sidebar({
     const handleCreate = async() =>{
         const newContent = await createContent({
             title: "新規メモ",
-            content: "",
+            body:  "本文を入力してください",
         })
         setSelectedId(newContent.id)
         console.log("新規作成");

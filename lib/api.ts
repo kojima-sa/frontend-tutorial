@@ -15,7 +15,7 @@ export async function fetchContent(id: number): Promise<Content> {
 }
 
 //新規投稿
-export async function createContent(content: { title: string; content: string }) {
+export async function createContent(content: { title: string; body: string }) {
     const res = await fetch(`${BASE_URL}/content`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,7 +40,7 @@ export async function titleUpdate(
 //本文編集
 export async function bodyUpdate(
     id: number,
-    content: { content: string }
+    content: { body: string }
 ) {
     const res = await fetch(`${BASE_URL}/content/${id}`, {
         method: "PATCH",

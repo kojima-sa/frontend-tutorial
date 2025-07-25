@@ -24,11 +24,28 @@ export default function MainContent({
     const [content, setContent] = useState<Content | null>(null)
     const [titleInput, setTitleInput] = useState("")
     const [bodyInput, setBodyInput] = useState("")
-    const id = selectedId;
-    const handleTitleEdit = async(id: number) => {
-    }
-    const handleBodyEdit = async(id: number) => {
-    }
+    const [titleError, setTitleError] = useState("")
+    const [bodyError, setBodyError] = useState("")
+    const handleTitleEdit = async() => {
+        if (selectedId === null) return;
+        try {
+            console.log(selectedId, titleInput);
+            await titleUpdate(selectedId, { title: titleInput });
+            setTitleEditMode(false);
+            console.log("タイトル更新");
+        }catch (error) {
+            console.error("タイトルの更新に失敗しました", error);
+        }
+    };
+    const handleBodyEdit = async() => {
+        if (selectedId === null) return;
+        try {
+            await bodyUpdate(selectedId, { body: bodyInput });
+            setBodyEditMode(false);
+        }catch (error) {
+            console.error("本文の更新に失敗しました", error);
+        }
+    };
 
         useEffect(() => {
         if (content) {
@@ -111,7 +128,7 @@ export default function MainContent({
                         isEditMode={titleEditMode}
                         onEnterEdit={() => setTitleEditMode(true)}
                         onCancelEdit={() => setTitleEditMode(false)}
-                        //onSaveEdit={() => }
+                        onSaveEdit={() => handleTitleEdit()}
                         />
                     </Box>
                 </Box>
@@ -133,7 +150,7 @@ export default function MainContent({
                                 variant="body1"
                                 sx={{ whiteSpace: "pre-line", p: 3.75, }}
                             >
-                                {content.body || "本文を入力してください"}
+                                {content.body}
                             </Typography>
                         ) : (
                             <>
@@ -158,7 +175,7 @@ export default function MainContent({
                         isEditMode={bodyEditMode}
                         onEnterEdit={() => setBodyEditMode(true)}
                         onCancelEdit={() => setBodyEditMode(false)}
-                        //onSaveEdit={() => }
+                        onSaveEdit={() => handleBodyEdit()}
                         />
                 </Box>
             </Container>

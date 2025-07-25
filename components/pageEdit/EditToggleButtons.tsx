@@ -8,14 +8,14 @@ type EditToggleButtonsProps = {
     isEditMode: boolean
     onEnterEdit: () => void
     onCancelEdit: () => void
-    //onSaveEdit: () => void
+    onSaveEdit: () => void
 }
 
 export default function EditToggleButtons({
     isEditMode,
     onEnterEdit,
     onCancelEdit,
-    //onSaveEdit,
+    onSaveEdit,
 }: EditToggleButtonsProps) {
     return (
         <Box sx={{ pl: "20px",
@@ -42,7 +42,7 @@ export default function EditToggleButtons({
                         icon={<SaveIcon sx={{ height: 24, width: 24 }} />}
                         sx={{ ml: "5px", }}
                         label="Save"
-                        //onClick={onSaveEdit}
+                        onClick={onSaveEdit}
                     />
                 </Box>
             </>
