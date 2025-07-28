@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { fetchContent, titleUpdate, bodyUpdate } from "@/lib/api"
+import { fetchContent, titleUpdate, bodyUpdate} from "@/lib/api"
 import type { Content } from "@/lib/types"
 import { Box, Typography, Container, TextField, } from "@mui/material"
 import EditToggleButtons from "./pageEdit/EditToggleButtons"
@@ -12,6 +12,7 @@ type Props = {
     titleEditMode:boolean
     setBodyEditMode: (value: boolean) => void;
     bodyEditMode: boolean
+    setRefreshSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function MainContent({
@@ -19,29 +20,50 @@ export default function MainContent({
     titleEditMode,
     setTitleEditMode,
     bodyEditMode,
-    setBodyEditMode
+    setBodyEditMode,
+    setRefreshSidebar
 }: Props) {
     const [content, setContent] = useState<Content | null>(null)
     const [titleInput, setTitleInput] = useState("")
     const [bodyInput, setBodyInput] = useState("")
     const [titleError, setTitleError] = useState("")
     const [bodyError, setBodyError] = useState("")
+
     const handleTitleEdit = async() => {
         if (selectedId === null) return;
         try {
-            console.log(selectedId, titleInput);
             await titleUpdate(selectedId, { title: titleInput });
             setTitleEditMode(false);
+            setContent((prev) => {
+                if (!prev) return prev;
+                return {
+                    ...prev,
+                    title: titleInput,
+                    body: bodyInput
+                };
+            });
             console.log("タイトル更新");
+            setRefreshSidebar(prev => !prev);
+            console.log("一覧更新");
         }catch (error) {
             console.error("タイトルの更新に失敗しました", error);
         }
     };
+
     const handleBodyEdit = async() => {
         if (selectedId === null) return;
         try {
             await bodyUpdate(selectedId, { body: bodyInput });
             setBodyEditMode(false);
+            setContent((prev) => {
+                if (!prev) return prev;
+                return {
+                    ...prev,
+                    title: titleInput,
+                    body: bodyInput
+                };
+            });
+            console.log("本文更新");
         }catch (error) {
             console.error("本文の更新に失敗しました", error);
         }

@@ -11,6 +11,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     const [selectedId, setSelectedId] = useState<number | null>(null)
     const [titleEditMode, setTitleEditMode] = useState(false);
     const [bodyEditMode, setBodyEditMode] = useState(false);
+    const [refreshSidebar, setRefreshSidebar] = useState(false);
 
     return (
         <Box
@@ -31,6 +32,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                     setSelectedId={setSelectedId}
                     setTitleEditMode={setTitleEditMode}
                     setBodyEditMode={setBodyEditMode}
+                    refreshSidebar={refreshSidebar}
+                    setRefreshSidebar={setRefreshSidebar}
                     />
             </Box>
             <Box
@@ -47,6 +50,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                         setTitleEditMode={setTitleEditMode}
                         bodyEditMode={bodyEditMode}
                         setBodyEditMode={setBodyEditMode}
+                        setRefreshSidebar={setRefreshSidebar}
                     />
                 </Box>
                 <Box>

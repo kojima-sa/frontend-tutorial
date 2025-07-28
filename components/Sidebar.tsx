@@ -19,6 +19,8 @@ type Props = {
     setSelectedId: (id: number| null) => void;
     setTitleEditMode: (value: boolean) => void;
     setBodyEditMode: (value: boolean) => void;
+    refreshSidebar: boolean;
+    setRefreshSidebar: (value: boolean) => void;
 };
 
 export default function Sidebar({
@@ -26,9 +28,11 @@ export default function Sidebar({
     setSelectedId,
     setTitleEditMode,
     setBodyEditMode,
+
 }: Props) {
     const [editMode, setEditMode] = useState(false)
     const [contents, setContents] = useState<Content[]>([])
+    const [refreshSidebar, setRefreshSidebar] = useState(false);
 
     //新規作成
     const handleCreate = async() =>{
@@ -69,7 +73,7 @@ export default function Sidebar({
             }
 
         loadContents()
-    }, []
+    }, [refreshSidebar]
 )
 
     return (
