@@ -9,13 +9,17 @@ export async function fetchContents():Promise<Content[]> {
 }
 
 //詳細画面
-export async function fetchContent(id: number): Promise<Content> {
+export async function fetchContent(
+    id: number
+): Promise<Content> {
     const res = await fetch(`${BASE_URL}/content/${id}`, { cache: "no-store" })
     return res.json()
 }
 
 //新規投稿
-export async function createContent(content: { title: string; content: string }) {
+export async function createContent(
+    content: { title: string; body: string }
+) {
     const res = await fetch(`${BASE_URL}/content`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -25,12 +29,13 @@ export async function createContent(content: { title: string; content: string })
 }
 
 //タイトル編集
-export async function titleUpdateContent(
+export async function titleUpdate(
     id: number,
     content: { title: string }
 ) {
-    const res = await fetch(`${BASE_URL}/content/${id}`, {
-        method: "PATCH",
+    const res = await fetch(`${BASE_URL}/content/${id}`,
+    {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(content),
     })
@@ -38,12 +43,13 @@ export async function titleUpdateContent(
 }
 
 //本文編集
-export async function bodyUpdateContent(
+export async function bodyUpdate(
     id: number,
-    content: { content: string }
+    content: { body: string }
 ) {
-    const res = await fetch(`${BASE_URL}/content/${id}`, {
-        method: "PATCH",
+    const res = await fetch(`${BASE_URL}/content/${id}`,
+    {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(content),
     })
@@ -51,7 +57,9 @@ export async function bodyUpdateContent(
 }
 
 //削除
-export async function deleteContent(id: number) {
+export async function deleteContent(
+    id: number
+) {
     await fetch(`${BASE_URL}/content/${id}`, {
         method: "DELETE",
     })

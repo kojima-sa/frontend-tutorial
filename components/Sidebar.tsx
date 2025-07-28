@@ -19,6 +19,8 @@ type Props = {
     setSelectedId: (id: number| null) => void;
     setTitleEditMode: (value: boolean) => void;
     setBodyEditMode: (value: boolean) => void;
+    refreshSidebar: boolean;
+    setRefreshSidebar: (value: boolean) => void;
 };
 
 export default function Sidebar({
@@ -26,15 +28,17 @@ export default function Sidebar({
     setSelectedId,
     setTitleEditMode,
     setBodyEditMode,
+
 }: Props) {
     const [editMode, setEditMode] = useState(false)
     const [contents, setContents] = useState<Content[]>([])
+    const [refreshSidebar, setRefreshSidebar] = useState(false);
 
     //新規作成
     const handleCreate = async() =>{
         const newContent = await createContent({
             title: "新規メモ",
-            content: "",
+            body:  "本文を入力してください",
         })
         setSelectedId(newContent.id)
         console.log("新規作成");
@@ -69,7 +73,7 @@ export default function Sidebar({
             }
 
         loadContents()
-    }, []
+    }, [refreshSidebar]
 )
 
     return (
@@ -176,7 +180,12 @@ export default function Sidebar({
                         label="New page"
                         variant="outlined"
                         sx={{px: 4, m: 1.25,}}
-                        onClick={() => handleCreate()}
+                        onClick={() => {
+                            handleCreate()
+                            setTitleEditMode(true);
+                            setBodyEditMode(true);
+                        }}
+                        
                     />
                     <CustomIconButton
                         icon={<DoneIcon sx={{ height: 24, width: 24 }} />}
