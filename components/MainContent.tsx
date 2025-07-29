@@ -31,9 +31,21 @@ export default function MainContent({
 
     const handleTitleEdit = async() => {
         if (selectedId === null) return;
+
+        const trimmedTitle = titleInput.trim();
+        if (trimmedTitle.length === 0 ) {
+            alert("空白のタイトルは無効です");
+            return;
+        }
+        if (trimmedTitle.length > 50 ) {
+            alert("タイトルは50文字以下で入力してください");
+            return;
+        }
+
         try {
             await titleUpdate(selectedId, { title: titleInput });
             setTitleEditMode(false);
+            setTitleError("");
             setContent((prev) => {
                 if (!prev) return prev;
                 return {
@@ -52,6 +64,17 @@ export default function MainContent({
 
     const handleBodyEdit = async() => {
         if (selectedId === null) return;
+
+        const trimmedBody = bodyInput.trim();
+        if (trimmedBody.length < 10 ) {
+            alert("本文は10文字以上で記入してください");
+            return;
+        }
+        if (trimmedBody.length > 2000 ) {
+            alert("本文はは2000文字以下で入力してください");
+            return;
+        }
+
         try {
             await bodyUpdate(selectedId, { body: bodyInput });
             setBodyEditMode(false);

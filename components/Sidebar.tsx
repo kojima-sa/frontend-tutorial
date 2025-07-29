@@ -28,11 +28,11 @@ export default function Sidebar({
     setSelectedId,
     setTitleEditMode,
     setBodyEditMode,
+    refreshSidebar,
 
 }: Props) {
     const [editMode, setEditMode] = useState(false)
     const [contents, setContents] = useState<Content[]>([])
-    const [refreshSidebar, setRefreshSidebar] = useState(false);
 
     //新規作成
     const handleCreate = async() =>{
