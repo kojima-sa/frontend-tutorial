@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import CustomIconButton from "../CustomIconButton"
+import CustomIconButton from "./CustomIconButton"
 import EditIcon from "@mui/icons-material/Edit"
 import CloseIcon from "@mui/icons-material/Close"
 import SaveIcon from "@mui/icons-material/Save"

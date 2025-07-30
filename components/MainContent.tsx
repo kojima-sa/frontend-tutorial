@@ -4,7 +4,11 @@ import { useEffect, useState } from "react"
 import { fetchContent, titleUpdate, bodyUpdate} from "@/lib/api"
 import type { Content } from "@/lib/types"
 import { Box, Typography, Container, TextField, } from "@mui/material"
-import EditToggleButtons from "./pageEdit/EditToggleButtons"
+import EditToggleButtons from "./utils/EditToggleButtons"
+import {
+    handleTitleEdit as handleTitleEditUtil,
+    handleBodyEdit as handleBodyEditUtil,
+} from "./utils/handlers"
 
 type Props = {
     selectedId: number | null
@@ -26,71 +30,29 @@ export default function MainContent({
     const [content, setContent] = useState<Content | null>(null)
     const [titleInput, setTitleInput] = useState("")
     const [bodyInput, setBodyInput] = useState("")
-    const [titleError, setTitleError] = useState("")
-    const [bodyError, setBodyError] = useState("")
 
-    const handleTitleEdit = async() => {
-        if (selectedId === null) return;
+    const handleTitleEdit = () => {
+    if (selectedId === null) return;
+    handleTitleEditUtil(
+        selectedId,
+        titleInput,
+        bodyInput,
+        setTitleEditMode,
+        setContent,
+        setRefreshSidebar
+    );
+};
 
-        const trimmedTitle = titleInput.trim();
-        if (trimmedTitle.length === 0 ) {
-            alert("空白のタイトルは無効です");
-            return;
-        }
-        if (trimmedTitle.length > 50 ) {
-            alert("タイトルは50文字以下で入力してください");
-            return;
-        }
-
-        try {
-            await titleUpdate(selectedId, { title: titleInput });
-            setTitleEditMode(false);
-            setTitleError("");
-            setContent((prev) => {
-                if (!prev) return prev;
-                return {
-                    ...prev,
-                    title: titleInput,
-                    body: bodyInput
-                };
-            });
-            console.log("タイトル更新");
-            setRefreshSidebar(prev => !prev);
-            console.log("一覧更新");
-        }catch (error) {
-            console.error("タイトルの更新に失敗しました", error);
-        }
-    };
-
-    const handleBodyEdit = async() => {
-        if (selectedId === null) return;
-
-        const trimmedBody = bodyInput.trim();
-        if (trimmedBody.length < 10 ) {
-            alert("本文は10文字以上で記入してください");
-            return;
-        }
-        if (trimmedBody.length > 2000 ) {
-            alert("本文はは2000文字以下で入力してください");
-            return;
-        }
-
-        try {
-            await bodyUpdate(selectedId, { body: bodyInput });
-            setBodyEditMode(false);
-            setContent((prev) => {
-                if (!prev) return prev;
-                return {
-                    ...prev,
-                    title: titleInput,
-                    body: bodyInput
-                };
-            });
-            console.log("本文更新");
-        }catch (error) {
-            console.error("本文の更新に失敗しました", error);
-        }
-    };
+    const handleBodyEdit = () => {
+    if (selectedId === null) return;
+    handleBodyEditUtil(
+        selectedId,
+        titleInput,
+        bodyInput,
+        setBodyEditMode,
+        setContent
+    );
+};
 
         useEffect(() => {
         if (content) {
@@ -172,7 +134,10 @@ export default function MainContent({
                         <EditToggleButtons
                         isEditMode={titleEditMode}
                         onEnterEdit={() => setTitleEditMode(true)}
-                        onCancelEdit={() => setTitleEditMode(false)}
+                        onCancelEdit={() => {
+                            setTitleEditMode(false)
+                            fetchContent(selectedId).then(setContent);
+                        }}
                         onSaveEdit={() => handleTitleEdit()}
                         />
                     </Box>
@@ -219,7 +184,10 @@ export default function MainContent({
                         <EditToggleButtons
                         isEditMode={bodyEditMode}
                         onEnterEdit={() => setBodyEditMode(true)}
-                        onCancelEdit={() => setBodyEditMode(false)}
+                        onCancelEdit={() => {
+                            setBodyEditMode(false)
+                            fetchContent(selectedId).then(setContent);
+                        }}
                         onSaveEdit={() => handleBodyEdit()}
                         />
                 </Box>
