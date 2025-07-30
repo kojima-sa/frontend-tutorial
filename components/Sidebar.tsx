@@ -8,10 +8,11 @@ import EditIcon from "@mui/icons-material/Edit"
 import DoneIcon from "@mui/icons-material/Done"
 import AddIcon from "@mui/icons-material/Add"
 import DeleteIcon from "@mui/icons-material/Delete"
-import CustomIconButton from "@/components/CustomIconButton";
+import CustomIconButton from "@/components/utils/CustomIconButton";
+import {handleCreateContent, handleDeleteContent } from "./utils/handlers"
 import Image from "next/image"
 import type { Content } from "@/lib/types"
-import { deleteContent, fetchContents, createContent } from "@/lib/api"
+import { fetchContents } from "@/lib/api"
 
 
 type Props = {
@@ -35,30 +36,13 @@ export default function Sidebar({
     const [contents, setContents] = useState<Content[]>([])
 
     //新規作成
-    const handleCreate = async() =>{
-        const newContent = await createContent({
-            title: "新規メモ",
-            body:  "本文を入力してください",
-        })
-        setSelectedId(newContent.id)
-        console.log("新規作成");
-
-        setContents(prev => [...prev, newContent])
+    const handleCreate = () => {
+        handleCreateContent(setSelectedId, setContents)
     }
 
     //削除
-    const id = selectedId;
-    const handleDelete = async(id: number) => {
-        const confirmDelete = window.confirm("本当に削除しますか？");
-            if (!confirmDelete) return;
-            if (id === null) return;
-            await deleteContent(id)
-            console.log("削除");
-
-        setContents(prev => prev.filter(item => item.id !== id));
-        if (selectedId === id) {
-            setSelectedId(null);
-        }
+    const handleDelete = (id: number) => {
+        handleDeleteContent(id, selectedId, setContents, setSelectedId)
     }
 
     //タイトル一覧取得
