@@ -70,7 +70,14 @@ export default function Main({
     }, [selectedId])
         if (selectedId === null) {
         return(
-            <Box>
+            <Box
+                sx={{
+                    height: "100vh",
+                    display:"flex",
+                    justifyContent:"center",
+                    alignItems:"center"
+                }}
+            >
                 <Typography variant="h6">
                     項目を選択してください
                 </Typography>

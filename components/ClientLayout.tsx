@@ -32,6 +32,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                     height: "100vh",
                     alignSelf: "flex-start",
                     top:"0",
+                    overflow: "auto",
                 }}
             >
                 <Sidebar
@@ -48,9 +49,14 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 display="flex"
                 flexDirection="column"
                 flex={1}
-                sx={{ minHeight: "100vh", position: "relative" }}
+                sx={{
+                    minHeight: "100vh",
+                    //position: "relative"
+                }}
             >
-                <Box sx={{ flexGrow: 1, pb: "60px" }}>
+                <Box sx={{ flexGrow: 1,
+                    //pb: "60px"
+                }}>
                     <MainContent
                         selectedId={selectedId}
                         titleEditMode={titleEditMode}
@@ -60,13 +66,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                         setRefreshSidebar={setRefreshSidebar}
                     />
                 </Box>
-                <Box
-                    sx={{position: "absolute",
-                        bottom: 0,
-                        width:" 100%",
-                        bgcolor: "background.paper",
-                    }}
-                >
+                <Box>
                     <Footer />
                 </Box>
             </Box>
