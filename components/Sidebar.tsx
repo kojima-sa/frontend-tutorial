@@ -112,6 +112,7 @@ export default function Sidebar({
                             selected={selectedId === item.id}
                             onClick={() => {
                                 setSelectedId(item.id);
+                                console.log(item.id);
                                 setTitleEditMode(false);
                                 setBodyEditMode(false);
                             }}

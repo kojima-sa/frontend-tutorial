@@ -1,11 +1,16 @@
 "use client"
 
 import { useState } from "react"
-import { Box } from "@mui/material"
+import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material"
 import Sidebar from "@/components/Sidebar"
 import MainContent from "@/components/MainContent"
 import Footer from "@/components/Footer";
 
+const theme = createTheme({
+    palette: {
+        mode: "light", // ダークモードにしたいときは "dark"
+    },
+})
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
     const [selectedId, setSelectedId] = useState<number | null>(null)
@@ -14,9 +19,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     const [refreshSidebar, setRefreshSidebar] = useState(false);
 
     return (
+        <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Box
             display="flex"
-            height="100vh"
+            //height="100vh"　これがあるとstickyが効かない
             pr="40px"
         >
             <Box
@@ -41,9 +48,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 display="flex"
                 flexDirection="column"
                 flex={1}
-                sx={{ minHeight: "100vh" }}
+                sx={{ minHeight: "100vh", position: "relative" }}
             >
-                <Box sx={{ flexGrow: 1 }}>
+                <Box sx={{ flexGrow: 1, pb: "60px" }}>
                     <MainContent
                         selectedId={selectedId}
                         titleEditMode={titleEditMode}
@@ -53,10 +60,17 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                         setRefreshSidebar={setRefreshSidebar}
                     />
                 </Box>
-                <Box>
+                <Box
+                    sx={{position: "absolute",
+                        bottom: 0,
+                        width:" 100%",
+                        bgcolor: "background.paper",
+                    }}
+                >
                     <Footer />
                 </Box>
             </Box>
         </Box>
+        </ThemeProvider>
     );
 }

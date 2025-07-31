@@ -10,7 +10,6 @@ export default function Footer(){
             height="64px"
             bottom={0}
             sx={{
-                width: "100%",
                 pl: 5,
             }}
         >
