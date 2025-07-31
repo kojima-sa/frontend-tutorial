@@ -19,7 +19,7 @@ type Props = {
     setRefreshSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function MainContent({
+export default function Main({
     selectedId,
     titleEditMode,
     setTitleEditMode,
@@ -70,7 +70,14 @@ export default function MainContent({
     }, [selectedId])
         if (selectedId === null) {
         return(
-            <Box>
+            <Box
+                sx={{
+                    height: "100vh",
+                    display:"flex",
+                    justifyContent:"center",
+                    alignItems:"center"
+                }}
+            >
                 <Typography variant="h6">
                     項目を選択してください
                 </Typography>
@@ -85,7 +92,7 @@ export default function MainContent({
     return (
         <Box
             sx={{
-                px: 5,
+                pl: 5,
                 pt:3.75
             }}
         >
@@ -107,7 +114,8 @@ export default function MainContent({
                             sx={{pl:"30px", py:"10px"}}
                             variant="h5"
                             fontWeight="bold"
-                            gutterBottom>{content.title}
+                            gutterBottom>
+                                {content.title}
                         </Typography>
                     ) : (
                         <>

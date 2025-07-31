@@ -68,8 +68,6 @@ export default function Sidebar({
             height="100vh"
             sx={{ borderRight: '1px solid #F5F8FA',
                 height: "100vh",
-                position: "sticky",
-                top: 0,
                 pl:"40px"
             }}
         >
@@ -80,7 +78,7 @@ export default function Sidebar({
                 mb={2}
                 sx={{ pt: 3.75, pb:2.5, }}
             >
-                <Image src="/icons/logo.png" alt="Logo" width={30} height={32} />
+                <Image src="recruit-frontend/Design/img/icon/logo.svg" alt="Logo" width={32} height={32} />
                 <Typography
                     variant="h6"
                     ml={1}
@@ -95,18 +93,15 @@ export default function Sidebar({
                 {contents.map(item => (
                     <ListItem key={item.id}
                         secondaryAction={editMode && (
-                        <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => handleDelete(item.id)}
-                            sx={{
-                                    pr:"10px",
-                                    overflow: "auto",
-                            }}
-                        >
-                            <DeleteIcon />
-                        </IconButton>
-                    )}
+                            <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={() => handleDelete(item.id)}
+                                sx={{ pr:"10px", }}
+                            >
+                                <DeleteIcon />
+                            </IconButton>
+                        )}
                     >
                         <ListItemButton
                             selected={selectedId === item.id}
@@ -129,8 +124,8 @@ export default function Sidebar({
                                         pr:"10px",
                                         display: "flex",
                                         alignItems: "center",
-                                }
-                            }}
+                                    }
+                                }}
                             />
                         </ListItemButton>
                     </ListItem>
@@ -169,7 +164,6 @@ export default function Sidebar({
                             setTitleEditMode(true);
                             setBodyEditMode(true);
                         }}
-                        
                     />
                     <CustomIconButton
                         icon={<DoneIcon sx={{ height: 24, width: 24 }} />}
