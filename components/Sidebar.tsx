@@ -142,36 +142,35 @@ export default function Sidebar({
                         pl:"40px",
                         display:"flex" ,
                         justifyContent: editMode ? "space-between" : "flex-end",
-                        alignItems: "center",
                     }}
                 >
-                    {!editMode ? (
+                    {editMode ? (
+                        <>
+                            <CustomIconButton
+                                icon={<AddIcon sx={{ height: 24, width: 24 }} />}
+                                label="New page"
+                                variant="outlined"
+                                sx={{px: 4, m: 1.25,}}
+                                onClick={() => {
+                                    handleCreate()
+                                    setTitleEditMode(true);
+                                    setBodyEditMode(true);
+                                }}
+                            />
+                            <CustomIconButton
+                                icon={<DoneIcon sx={{ height: 24, width: 24 }} />}
+                                label="Done"
+                                sx={{px: 4, m: 1.25,}}
+                                onClick={() => setEditMode(false)}
+                            />
+                        </>
+                    ) : (
                         <CustomIconButton
                             icon={<EditIcon sx={{ height: 24, width: 24, }} />}
                             label="Edit"
                             sx={{px: 4, m: 1.25,}}
                             onClick={() => setEditMode(true)}
                         />
-                    ) : (
-                    <>
-                    <CustomIconButton
-                        icon={<AddIcon sx={{ height: 24, width: 24 }} />}
-                        label="New page"
-                        variant="outlined"
-                        sx={{px: 4, m: 1.25,}}
-                        onClick={() => {
-                            handleCreate()
-                            setTitleEditMode(true);
-                            setBodyEditMode(true);
-                        }}
-                    />
-                    <CustomIconButton
-                        icon={<DoneIcon sx={{ height: 24, width: 24 }} />}
-                        label="Done"
-                        sx={{px: 4, m: 1.25,}}
-                        onClick={() => setEditMode(false)}
-                    />
-                    </>
                     )}
                 </Box>
             </Box>
