@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { fetchContent, titleUpdate, bodyUpdate} from "@/lib/api"
+import { fetchContent } from "@/lib/api"
 import type { Content } from "@/lib/types"
 import { Box, Typography, Container, TextField, } from "@mui/material"
 import EditToggleButtons from "./utils/EditToggleButtons"
@@ -26,7 +26,7 @@ export default function Main({
     bodyEditMode,
     setBodyEditMode,
     setRefreshSidebar
-}: Props) {
+}: Props){
     const [content, setContent] = useState<Content | null>(null)
     const [titleInput, setTitleInput] = useState("")
     const [bodyInput, setBodyInput] = useState("")
@@ -90,72 +90,49 @@ export default function Main({
     }
 
     return (
-        <Box
-            sx={{
-                pl: 5,
-                pt:3.75
-            }}
-        >
-            <Container
-                sx={{
-                    p:3.75,
-                    backgroundColor: "#F5F8FA",
-                }}
-            >
+        <Box sx={{ pl: 5, pt:3.75 }}>
+            <Container sx={{ p:3.75, backgroundColor: "#F5F8FA",}}>
                 <Box
-                    sx={{
-                        pb: 2.5,
-                        display:"flex",
+                    sx={{ pb: 2.5, display:"flex",
                         justifyContent:"space-between",
                     }}
                 >
-                    { !titleEditMode ? (
+                    { titleEditMode ? (
+                        <TextField
+                            variant="outlined"
+                            sx={{ backgroundColor:"#FFFFFF" }}
+                            fullWidth
+                            color="primary"
+                            value={ titleInput }
+                            onChange={(e) => setTitleInput(e.target.value)}
+                            required
+                            InputProps={{
+                                sx:{ fontWeight:"bold", fontSize:"23px",pl:"20px" }
+                            }}
+                        />
+                    ) : (
                         <Typography
                             sx={{pl:"30px", py:"10px"}}
                             variant="h5"
                             fontWeight="bold"
-                            gutterBottom>
-                                {content.title}
+                            gutterBottom
+                        >
+                            {content.title}
                         </Typography>
-                    ) : (
-                        <>
-                            <TextField
-                                variant="outlined"
-                                sx={{ backgroundColor:"#FFFFFF" }}
-                                fullWidth
-                                color="primary"
-                                value={ titleInput }
-                                onChange={(e) => setTitleInput(e.target.value)}
-                                required
-                                InputProps={{
-                                    sx:{ fontWeight:"bold", fontSize:"23px",pl:"20px" }
-                                }}
-                            />
-                        </>
                     )}
-                    <Box
-                        sx={{
-                            display: "flex",
-                            alignItems: "center",
-                        }}
-                    >
+                    <Box sx={{ display: "flex", alignItems: "center", }}>
                         <EditToggleButtons
-                        isEditMode={titleEditMode}
-                        onEnterEdit={() => setTitleEditMode(true)}
-                        onCancelEdit={() => {
-                            setTitleEditMode(false)
-                            fetchContent(selectedId).then(setContent);
-                        }}
-                        onSaveEdit={() => handleTitleEdit()}
+                            isEditMode={titleEditMode}
+                            onEnterEdit={() => setTitleEditMode(true)}
+                            onSaveEdit={() => handleTitleEdit()}
+                            onCancelEdit={() => {
+                                setTitleEditMode(false)
+                                fetchContent(selectedId).then(setContent);
+                            }}
                         />
                     </Box>
                 </Box>
-                <Box
-                    sx={{
-                        display:"flex",
-                        justifyContent:"space-between",
-                    }}
-                >
+                <Box sx={{ display:"flex", justifyContent:"space-between", }}>
                     <Box
                         sx={{
                             backgroundColor:"#FFFFFF",
@@ -163,40 +140,36 @@ export default function Main({
                             width: "100%",
                         }}
                     >
-                        { !bodyEditMode ? (
+                        { bodyEditMode ? (
+                            <TextField
+                                    variant="outlined"
+                                    placeholder = "本文を入力してください"
+                                    sx={{ backgroundColor:"#FFFFFF"}}
+                                    fullWidth
+                                    multiline
+                                    required
+                                    color="primary"
+                                    value={ bodyInput }
+                                    onChange={(e) => setBodyInput(e.target.value)}
+                                    InputProps={{ sx:{ p:"30px" }}}
+                                />
+                        ) : (
                             <Typography
                                 variant="body1"
                                 sx={{ whiteSpace: "pre-line", p: 3.75, }}
                             >
                                 {content.body}
                             </Typography>
-                        ) : (
-                            <>
-                                <TextField
-                                    variant="outlined"
-                                    placeholder = "本文を入力してください"
-                                    sx={{ backgroundColor:"#FFFFFF"}}
-                                    fullWidth
-                                    multiline
-                                    color="primary"
-                                    value={ bodyInput }
-                                    onChange={(e) => setBodyInput(e.target.value)}
-                                    InputProps={{
-                                        sx:{ p:"30px" }
-                                    }}
-                                    required
-                                />
-                            </>
                         )}
                     </Box>
                         <EditToggleButtons
-                        isEditMode={bodyEditMode}
-                        onEnterEdit={() => setBodyEditMode(true)}
-                        onCancelEdit={() => {
-                            setBodyEditMode(false)
-                            fetchContent(selectedId).then(setContent);
-                        }}
-                        onSaveEdit={() => handleBodyEdit()}
+                            isEditMode={bodyEditMode}
+                            onEnterEdit={() => setBodyEditMode(true)}
+                            onSaveEdit={() => handleBodyEdit()}
+                            onCancelEdit={() => {
+                                setBodyEditMode(false)
+                                fetchContent(selectedId).then(setContent);
+                            }}
                         />
                 </Box>
             </Container>

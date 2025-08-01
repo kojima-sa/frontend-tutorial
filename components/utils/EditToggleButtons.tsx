@@ -18,34 +18,31 @@ export default function EditToggleButtons({
     onSaveEdit,
 }: EditToggleButtonsProps) {
     return (
-        <Box sx={{ pl: "20px",
-        }}>
-            {!isEditMode ? (
+        <Box sx={{ pl: "20px",}}>
+            {isEditMode ? (
+                <>
+                    <Box sx={{display: "flex"}}>
+                        <CustomIconButton
+                            icon={<CloseIcon sx={{ height: 24, width: 24 }} />}
+                            sx={{ mr: "5px", backgroundColor: "#cccccc" }}
+                            label="Cancel"
+                            onClick={onCancelEdit}
+                        />
+                        <CustomIconButton
+                            icon={<SaveIcon sx={{ height: 24, width: 24 }} />}
+                            sx={{ ml: "5px", }}
+                            label="Save"
+                            onClick={onSaveEdit}
+                        />
+                    </Box>
+                </>
+            ) : (
                 <CustomIconButton
                     icon={<EditIcon sx={{ height: 24, width: 24 }} />}
                     label="Edit"
                     onClick={onEnterEdit}
                     sx={{ px: 4 }}
                 />
-            ) : (
-            <>
-                <Box
-                    sx={{display: "flex"}}
-                >
-                    <CustomIconButton
-                        icon={<CloseIcon sx={{ height: 24, width: 24 }} />}
-                        sx={{ mr: "5px", backgroundColor: "#cccccc" }}
-                        label="Cancel"
-                        onClick={onCancelEdit}
-                    />
-                    <CustomIconButton
-                        icon={<SaveIcon sx={{ height: 24, width: 24 }} />}
-                        sx={{ ml: "5px", }}
-                        label="Save"
-                        onClick={onSaveEdit}
-                    />
-                </Box>
-            </>
             )}
         </Box>
     )
