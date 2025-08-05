@@ -49,14 +49,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 display="flex"
                 flexDirection="column"
                 flex={1}
-                sx={{
-                    minHeight: "100vh",
-                    //position: "relative"
-                }}
+                sx={{ minHeight: "100vh",}}
             >
-                <Box sx={{ flexGrow: 1,
-                    //pb: "60px"
-                }}>
+                <Box sx={{ flexGrow: 1, }}>
                     <MainContent
                         selectedId={selectedId}
                         titleEditMode={titleEditMode}
