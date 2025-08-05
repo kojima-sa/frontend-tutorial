@@ -54,7 +54,7 @@ export default function Main({
     );
 };
 
-        useEffect(() => {
+    useEffect(() => {
         if (content) {
             setTitleInput(content.title)
             setBodyInput(content.body)
