@@ -94,6 +94,7 @@ export default function Sidebar({
                     <ListItem key={item.id}
                         secondaryAction={editMode && (
                             <IconButton
+                                data-testid="delete-button"
                                 edge="end"
                                 aria-label="delete"
                                 onClick={() => handleDelete(item.id)}
@@ -116,6 +117,7 @@ export default function Sidebar({
                             }}
                         >
                             <ListItemText
+                                data-testid={`title-${item.id}`}
                                 primary={item.title}
                                 primaryTypographyProps={{
                                     sx: {
