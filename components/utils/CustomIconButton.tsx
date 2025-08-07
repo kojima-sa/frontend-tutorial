@@ -10,6 +10,7 @@ type Props = {
     onClick?: () => void
     variant?: "contained" | "outlined"
     sx?: SxProps<Theme>
+    "data-testid"?: string
 }
 
 export default function CustomIconButton({
@@ -18,11 +19,13 @@ export default function CustomIconButton({
     onClick,
     variant = "contained",
     sx = {},
+    "data-testid": dataTestId,
 }: Props) {
     return (
         <Button
             onClick={onClick}
             variant={variant}
+            data-testid={dataTestId}
             sx={{
                 backgroundColor: variant === "contained" ? "#4CB3F8" : "white",
                 color: variant === "contained" ? "white" : "#4CB3F8",

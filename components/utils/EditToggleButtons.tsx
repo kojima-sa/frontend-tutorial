@@ -37,14 +37,14 @@ export default function EditToggleButtons({
                             icon={<CloseIcon sx={{ height: 24, width: 24 }} />}
                             sx={{ mr: "5px", backgroundColor: "#cccccc" }}
                             label="Cancel"
-                            data-testid={`${prefix}closeButton`}
+                            data-testid={`${prefix}CloseButton`}
                             onClick={onCancelEdit}
                         />
                         <CustomIconButton
                             icon={<SaveIcon sx={{ height: 24, width: 24 }} />}
                             sx={{ ml: "5px", }}
                             label="Save"
-                            data-testid={`${prefix}saveButton`}
+                            data-testid={`${prefix}SaveButton`}
                             onClick={onSaveEdit}
                         />
                     </Box>
@@ -53,7 +53,7 @@ export default function EditToggleButtons({
                 <CustomIconButton
                     icon={<EditIcon sx={{ height: 24, width: 24 }} />}
                     label="Edit"
-                    data-testid={`${prefix}editButton`}
+                    data-testid={`${prefix}EditButton`}
                     onClick={onEnterEdit}
                     sx={{ px: 4 }}
                 />

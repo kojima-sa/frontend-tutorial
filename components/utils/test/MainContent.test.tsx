@@ -45,14 +45,16 @@ test('selectedId で指定した ID のタイトルと本文が表示される',
     await waitFor(() => {
         expect(screen.getByTestId('title-1')).toBeInTheDocument()
     })
+    expect(screen.getByTestId('title-1')).toHaveTextContent('タイトル1')
     expect(screen.getByTestId('body-1')).toHaveTextContent('あめんぼ あかいな あいうえお 1')
 })
 
-test (`title-edit を クリックするとタイトル編集モードになり、タイトル入力欄が出る`, async () => {
-    renderMainContent({ setTitleEditMode: true })
-    const editButton = await screen.findByTestId('title-editButton')
-    fireEvent.click(editButton)
-    expect(setTitleEditMode).toHaveBeenCalledWith(true)
+test (`title-edit を クリックするとタイトル編集モードになる`, async () => {
+    renderMainContent()
+    const titleEditButton = await screen.findByTestId('titleEditButton')
+    fireEvent.click(titleEditButton)
+    expect(screen.findByTestId('titleCloseButton')).toBeInTheDocument()
+    expect(screen.findByTestId('titleSaveButton')).toBeInTheDocument()
 })
 
 test (``, () => {})

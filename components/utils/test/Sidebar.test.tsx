@@ -65,8 +65,8 @@ test('Done ボタンを押すと編集モードが終了する', () => {
 test('削除ボタンで handleDeleteContent が呼ばれる', async () => {
     renderSidebar()
     fireEvent.click(screen.getByRole('button', { name: 'Edit' }))
-    const deleteButtons = await screen.findAllByTestId('delete-button')
-    fireEvent.click(deleteButtons[1])
+    const deleteButton = await screen.findAllByTestId('delete-button')
+    fireEvent.click(deleteButton[1])
     expect(handleDeleteContent).toHaveBeenCalledWith(
         2, // 削除対象ID
         1, // 現在選択中のID（selectedId）
