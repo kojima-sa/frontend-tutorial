@@ -1,15 +1,15 @@
-import  Sidebar  from "./Sidebar";
+import  Sidebar  from "../../Sidebar";
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 
 
-jest.mock('./utils/handlers', () => ({
+jest.mock('../handlers', () => ({
     handleCreateContent: jest.fn(),
     handleDeleteContent: jest.fn(),
 }))
 
-import { handleCreateContent, handleDeleteContent } from './utils/handlers'
+import { handleCreateContent, handleDeleteContent } from '../handlers'
 
-jest.mock('../lib/api', () => ({
+jest.mock('../../../lib/api', () => ({
     fetchContents: jest.fn(() =>
         Promise.resolve([
         { id: 1, title: 'タイトル1', body: 'あめんぼ あかいな あいうえお 1' },

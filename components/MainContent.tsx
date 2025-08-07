@@ -99,6 +99,7 @@ export default function Main({
                 >
                     { titleEditMode ? (
                         <TextField
+                            data-testid="title-input"
                             variant="outlined"
                             sx={{ backgroundColor:"#FFFFFF" }}
                             fullWidth
@@ -116,6 +117,7 @@ export default function Main({
                             variant="h5"
                             fontWeight="bold"
                             gutterBottom
+                            data-testid={`title-${selectedId}`}
                         >
                             {content.title}
                         </Typography>
@@ -129,6 +131,10 @@ export default function Main({
                                 setTitleEditMode(false)
                                 fetchContent(selectedId).then(setContent);
                             }}
+                            editButton={() => 'title-edit'}
+                            saveButton={() => 'title-save'}
+                            closeButton={() => 'title-close'}
+                            testIdPrefix="title"
                         />
                     </Box>
                 </Box>
@@ -157,6 +163,7 @@ export default function Main({
                             <Typography
                                 variant="body1"
                                 sx={{ whiteSpace: "pre-line", p: 3.75, }}
+                                data-testid={`body-${selectedId}`}
                             >
                                 {content.body}
                             </Typography>
@@ -170,6 +177,10 @@ export default function Main({
                                 setBodyEditMode(false)
                                 fetchContent(selectedId).then(setContent);
                             }}
+                            editButton={() => 'body-edit'}
+                            saveButton={() => 'body-save'}
+                            closeButton={() => 'body-close'}
+                            testIdPrefix="body"
                         />
                 </Box>
             </Container>
