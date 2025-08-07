@@ -78,7 +78,7 @@ export default function Sidebar({
                 mb={2}
                 sx={{ pt: 3.75, pb:2.5, }}
             >
-                <Image src="recruit-frontend/Design/img/icon/logo.svg" alt="Logo" width={32} height={32} />
+                <Image src="frontend/lib/icon/logo.svg" alt="Logo" width={32} height={32} />
                 <Typography
                     variant="h6"
                     ml={1}
